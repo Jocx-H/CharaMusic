@@ -1,0 +1,100 @@
+<template>
+		<view> 
+			<text class="title">聆听汉字</text>
+			<view class="pic">
+				<view class="start-img">
+					<image style="width:150px;" mode="aspectFit" src="../../static/start.png"  @click="start()"></image>
+				</view>
+				<!-- <image style="width: 900px; height: 1200px; " mode="aspectFit" src="../../static/乐器总.png"></image> -->
+			</view>
+		</view>
+</template>
+<script>
+	export default {
+		data() {
+			return {
+				title: 'Home',
+				token: "",
+				pic_id: 0,
+			};
+		},
+		methods: {
+			start() {
+				console.log("start");
+				uni.request({
+					url: 'http://YOURAPIIP:PORT/api/home/token',
+					method: 'GET',
+					success: res => {
+						console.log(res.data.data)
+						this.token = res.data.data.token
+						this.pic_id = res.data.data.picture_id
+						getApp().globalData.img = "../../static/pics/" + res.data.data.pic_name
+						uni.navigateTo({
+							url:"/pages/CharacterRec/Input/Input?token=" + this.token + "&picid=" + this.pic_id,
+						})
+					}
+				})
+			},
+		}
+	}
+</script>
+
+
+<style lang="scss">
+	page{
+		height: 100%;
+		position: fixed;
+		background: url('~@/static/绢帛.png');
+		background-repeat: no-repeat;
+	}
+	@font-face{
+		font-family: lishu;
+		src: url('~@/static/font/other/YuWeiShuFaLiShuJianTi-1.ttf');
+	}
+	.title{
+		font-family: lishu;
+		font-size:calc(180%);
+		font-weight:bold;
+		display: flex;
+		align-items: center;//适合单行显示的组件，垂直居中
+		justify-content: center;//水平居中
+		// color: #000000;
+		margin: 70px 50px 5px 50px;
+	}
+	// 鼠标悬停放大效果
+	image{
+		// width: 100px;
+		// height: 300px;
+		color: white;
+		list-style: none;
+		transition: .3s linear;
+	}
+	image:hover{
+		transform: scale(1.3);    /*盒子放大*/
+	}
+	image::before, image::after{
+	    position: absolute;
+	    content: '';
+	    transition: 1.3s ease-out ;
+	}
+</style>
+
+<style scoped>
+	.start{
+		color:#000000;
+	}
+	.pic{
+		width: calc(100%);
+		height: 600px;
+		background-image: url("../../static/乐器总.png");
+		background-size: cover;
+	}
+	.start-img{
+		display: flex;
+		align-items: center;//适合单行显示的组件，垂直居中
+		justify-content: center;//水平居中
+	}
+	image{
+		margin-top: 270px;;
+	}
+</style>

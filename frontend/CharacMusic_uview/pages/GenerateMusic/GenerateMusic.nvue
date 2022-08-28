@@ -1,0 +1,536 @@
+<template>
+	<div>
+		<div class="home">
+			<!-- //98 190 157  62be9d  8c5a21 -->
+			<div class="bg" :style="{ background: bgColorList[colorIndex] }"></div>
+			<div class="container">
+				<div class="color-name" :style="{'font-family':prefont, 'color':colorBright?bgColorNameColor[1]:bgColorNameColor[0]}"> {{bgColorName[colorIndex]}} </div>
+				<div class="poem" :style="{'font-family':prefont, 'color':colorBright?bgColorNameColor[1]:bgColorNameColor[0]}">  {{bgPoemSentence[colorIndex]}} </div>
+				<div class="poem-info" :style="{'font-family':prefont, 'color':colorBright?bgColorNameColor[1]:bgColorNameColor[0]}">  —— 《{{bgPoemTitle[colorIndex]}}》 {{bgPoemAuthor[colorIndex]}}</div>
+				<!-- 点击查看音乐信息 -->
+				<u-icon class="show-info-btn" color="#000000" :color="colorBright>0.7?'#000000':'#ffffff'" name="info-circle" size="30" @tap="showInfo()"></u-icon>
+				<u-transition mode="fade-zoom" :show="show" :custom-style="style_info" >
+					<view class="transition-info" :style="{'color':colorBright?bgColorNameColor[1]:bgColorNameColor[0]}"> ↑ </view>
+					<view class="transition-info" :style="{'color':colorBright?bgColorNameColor[1]:bgColorNameColor[0]}"> 点击按钮即可查看相关摘要 </view>
+				</u-transition>
+			</div>
+			<!-- 播放条 -->
+			<div class="player-slider" color="#ffffff":color="colorBright>0.7?'#000000':'#ffffff'">
+				<div class="player-currentTime" :style="{'color':colorBright?bgColorNameColor[1]:bgColorNameColor[0]}">
+					{{chCurrentTime[0]}}:{{chCurrentTime[1]}}
+				</div>
+				<slider class="slider" 
+					min="0"
+					:max="duration"
+					:value="currentTime"
+					activeColor="#ffffff"
+					backgroundColor="#000000"
+					block-size="12"
+					@change="changeProgress"/>
+				<div class="player-duration"  :style="{'color':colorBright?bgColorNameColor[1]:bgColorNameColor[0]}">
+					{{chDuration[0]}}:{{chDuration[1]}}
+				</div>
+			</div>
+			<!-- playbar -->
+			<view class="btn">
+				<u-row justify="center" gutter="260">
+				    <u-col span="2">
+						<u-icon color="#000000":color="colorBright>0.7?'#000000':'#ffffff'" name="arrow-leftward" size="50" @tap="pre" ></u-icon>
+				    </u-col>
+				    <u-col span="2">
+						<u-icon color="#000000":color="colorBright>0.7?'#000000':'#ffffff'" name="play-circle" :name="ifPlay?'pause-circle':'play-circle'" size="50" @tap="playMusic" ></u-icon>
+				    </u-col>
+				    <u-col span="2">
+				        <u-icon color="#000000":color="colorBright>0.7?'#000000':'#ffffff'" name="download" size="50" @tap="download" ></u-icon>
+				    </u-col>
+				</u-row>
+			</view>
+			<view class="btn">
+				<u-row justify="center" gutter="300">
+				    <u-col span="2">
+						<u-transition mode="fade-zoom" :show="show" :custom-style="style1" >
+							<view class="transition-info" :style="{'color':colorBright?bgColorNameColor[1]:bgColorNameColor[0]}" style="margin-left: -20px;"> ↑ </view>
+							<view class="transition" :style="{'color':colorBright?bgColorNameColor[1]:bgColorNameColor[0]}"> 返回重新生成音乐 </view>
+						</u-transition>
+				    </u-col>
+				    <u-col span="2">
+						<u-transition mode="fade-zoom" :show="show" :custom-style="style2" >
+							<view class="transition" :style="{'color':colorBright?bgColorNameColor[1]:bgColorNameColor[0]}"> 温馨提示：按下“F11”全屏观看体验更加哦~ </view>
+						</u-transition>
+				    </u-col>
+				    <u-col span="2">
+				        <u-transition mode="fade-zoom" :show="show" :custom-style="style3" >
+				        	<view class="transition-info" :style="{'color':colorBright?bgColorNameColor[1]:bgColorNameColor[0]}" style="margin-left: 25px;"> ↑ </view>
+				        	<view class="transition" :style="{'color':colorBright?bgColorNameColor[1]:bgColorNameColor[0]}" style="margin-left: 30px;"> 同时下载mp3和mid文件 </view>
+				        </u-transition>
+				    </u-col>
+				</u-row>
+			</view>
+			<!-- 弹窗，显示音乐信息 -->
+			<view class="info">
+				<u-popup :show="show_info" :round="10" mode="center" overlayOpacity=0.3 bgColor="#fffffff2" @close="close">
+					<text class="info-abstract" selectable="true"> 相关摘要 </text>
+					<scroll-view class="info-box" scroll-y="true" show-scrollbar="true">
+						<text class="info-sub-title" selectable="true"> 获取的唐诗： </text>
+						<view class="info-poem" v-for="(item, j) in bgPoemTitle" :key="j+'b'">
+							<text selectable="true"> {{bgPoemSentence[j]}} </text>
+							<text selectable="true" style="text-align: right; margin-right: 40px;">  ———— 《{{bgPoemTitle[j]}}》 {{bgPoemAuthor[j]}}</text>
+						</view>
+						<text class="info-sub-title" selectable="true"> 获取的传统颜色表：</text>
+						<view class="" v-for="(item, index) in bgColorList" :key="index">
+							<view class="info-color-area" :style="{'background-color': bgColorList[index]}">
+								<text class="info-color-name-rgb" selectable="true" :style="{'color' : bgColorBright[index]>0.7 ? bgColorNameColor[1]:bgColorNameColor[0]}" >{{bgColorName[index]}}</text>
+								<text class="info-color-name-rgb" selectable="true" :style="{'color' : bgColorBright[index]>0.7 ? bgColorNameColor[1]:bgColorNameColor[0]}" >{{bgColorList[index]}}</text>
+							</view>
+						</view>
+					</scroll-view>
+				</u-popup>
+			</view>
+		</div>
+	</div>
+</template>
+
+<script>
+	const audioContext = uni.createInnerAudioContext();
+	audioContext.autoplay = false;
+	audioContext.src = 'http://music.163.com/song/media/outer/url?id=275945.mp3';
+	export default {
+		data() {
+			return {
+				token: "",
+				pic_id: 0,
+				show: false,							// 是否显示 “全屏提示”
+				show_info: false, 						// 是否显示音乐信息
+				style: {								// “全屏提示”的样式
+				    position: "fixed",
+				    top: `${uni.$u.sys().windowHeight / 2 + 300}px`,
+				    left: `${uni.$u.sys().windowWidth / 2 - 600}px`,
+				    width: "900px",
+				    height: "60px",
+				    backgroundColor: this.bgColorNameColor,
+				},
+				style_info: {								// “全屏提示”的样式
+				    position: "fixed",
+				    top: `${uni.$u.sys().windowHeight / 2 + 80}px`,
+				    left: `${uni.$u.sys().windowWidth / 2 - 150}px`,
+				    width: "300px",
+				    height: "60px",
+				    backgroundColor: this.bgColorNameColor,
+				},
+				style1:{
+					position: "fixed",
+					top: `${uni.$u.sys().windowHeight / 2 + 280}px`,
+					left: `${uni.$u.sys().windowWidth / 2 - 400}px`,
+					width: "300px",
+					height: "60px",
+					backgroundColor: this.bgColorNameColor,
+				},
+				style2:{
+					position: "fixed",
+					top: `${uni.$u.sys().windowHeight / 2 + 300}px`,
+					left: `${uni.$u.sys().windowWidth / 2 - 150}px`,
+					width: "300px",
+					height: "60px",
+					backgroundColor: this.bgColorNameColor,
+				},
+				style3:{
+					position: "fixed",
+					top: `${uni.$u.sys().windowHeight / 2 + 280}px`,
+					left: `${uni.$u.sys().windowWidth / 2 + 100}px`,
+					width: "300px",
+					height: "60px",
+					backgroundColor: this.bgColorNameColor,
+				},
+				emo_value: [],
+				colorIndex: 0,										// 背景颜色 当前颜色下标
+				colorLen: 6,										// 背景颜色 列表长度
+				bgColorList: ["#e9f1f6"],		// 背景颜色列表
+				bgPoemSentence: ["肌肤销尽雪霜色，罗绮点成苔藓斑"],
+				bgPoemAuthor: ["刘禹锡"],						// 诗词的作者
+				bgPoemTitle: ["望夫山"],						// 诗词的题目
+				bgColorBright: ["0.90"],			// 背景颜色的明暗
+				bgColorName: ["霜色"],		// 背景颜色的名字
+				bgColorNameColor: ["#ffffff","#000000"],	// 名字的颜色，根据明度算
+				colorBright: true,							// 背景颜色的明度
+				
+				windowHeight: 0,
+				txt_font_pre: ["", ""],
+				pretxt: "",			// 上一个页面传来的文本
+				prefont: "zhuanshu",		// 上一个页面传来的字体
+				duration: '100',
+				currentTime: '0',
+				chDuration: ['0', '00'],
+				chCurrentTime: ['0', '00'],
+				ifPlay: false,
+			}
+		},
+		onLoad(e) {
+			this.pic_id = e.picid
+			if (e.txt){
+				// 将string处理为数组
+				let obj = e.txt.replace("\"([^\"]*)\"", "$1");
+				this.txt_font_pre = JSON.parse(obj);
+				console.log("传来的文本+字体")
+				console.log(this.txt_font_pre);
+				this.prefont = this.txt_font_pre[1];
+				this.pretxt = this.txt_font_pre[0].replace(/"/g, "");
+				console.log(this.prefont);
+				console.log(this.pretxt);
+				this.prefont = "font_" + this.prefont;
+				console.log(this.prefont);
+			};
+			if (e.forcolor){
+				// 将string处理为数组
+				let obj = e.forcolor.replace("\"([^\"]*)\"", "$1");
+				this.emo_value = JSON.parse(obj);
+			}
+			this.token = e.token;
+			console.log("传过来token, emo")
+			console.log(this.token);
+			console.log(this.emo_value);
+			this.openTransition();
+			this.colorChange();
+			this.refreshMusicTime();
+			// 请求颜色和诗词
+			uni.request({
+				url: 'http://YOURAPIIP:PORT/api/music/get-colors-poems',
+				data: {
+					"identify": this.token,
+					"section_emo_values": this.emo_value
+				},
+				method: 'POST',
+				success: res => {
+					console.log("颜色诗词获取成功")
+					console.log(res)
+					this.colorLen = res.data.length
+					this.bgColorList = res.data.colors.color_rgbs
+					this.bgColorName = res.data.colors.color_names
+					this.bgColorBright = res.data.colors.color_lights
+					this.bgPoemSentence = res.data.poems.sentences
+					this.bgPoemAuthor = res.data.poems.authors
+					this.bgPoemTitle = res.data.poems.names
+					audioContext.src = 'http://YOURAPIIP:PORT/api/music/get-mp3/' + this.token
+					// audioContext.src = 'http://YOURAPIIP:PORT/api/music/get-mp3/' + this.token
+					console.log('音源路径：', audioContext.src)
+				}
+			})
+		},
+		mounted: function (res) {
+			var that = this;
+			uni.getSystemInfo({
+				success: function (res) {
+					that.windowHeight = res.windowHeight;
+				}
+			});
+		},
+		methods: {
+			close(){
+				this.show_info = false;
+			},
+			showInfo(){
+				this.show_info = true;
+			},
+			refreshMusicTime(){
+				setInterval(() => {
+					// console.log("当前时间：")
+					// console.log(this.currentTime)
+					var duration = audioContext.duration;
+					var currentTime = audioContext.currentTime;
+				    this.currentTime = currentTime;
+					this.chDuration[0] = Math.floor(Math.floor(duration)/60);
+					this.chDuration[1] = Math.floor(duration)%60;
+					this.chCurrentTime[0] = Math.floor(Math.floor(currentTime)/60);
+					this.chCurrentTime[1] = Math.floor(currentTime)%60;
+					if (this.currentTime == duration){
+						this.ifPlay = false;
+					}
+				}, 1200);
+			},
+			openTransition() {
+			    this.show = true;
+			    setTimeout(() => {
+			        this.show = false;
+			    }, 8000);
+			},
+			colorChange(){
+				setInterval(() => {
+					// console.log("in:");
+					// console.log(this.colorIndex);
+					if ((this.colorIndex+1) < this.colorLen){
+						// console.log("after change");
+						this.colorIndex = this.colorIndex + 1;
+						// console.log(this.colorIndex);
+						if (this.bgColorBright[this.colorIndex] > 0.7){
+							this.colorBright = true;
+						}
+						else{
+							this.colorBright = false;
+						}	
+					}
+					else{
+						// console.log('---repeat---')
+						this.colorIndex = 0;
+					}
+				}, 6000);
+			},
+
+			playMusic(){
+				var duration = audioContext.duration;
+				var currentTime = audioContext.currentTime;
+				console.log('playMusic中音源路径', audioContext.src)
+				this.duration = duration;
+				this.currentTime = currentTime;
+				this.chDuration[0] = Math.floor(Math.floor(duration)/60);
+				this.chDuration[1] = Math.floor(duration)%60;
+				this.chCurrentTime[0] = Math.floor(Math.floor(currentTime)/60);
+				this.chCurrentTime[1] = Math.floor(currentTime)%60;
+				if (this.ifPlay) {
+					this.ifPlay = false;
+					audioContext.pause();
+				} else {
+					this.ifPlay = true;
+					audioContext.play();
+				}
+			},
+			changeProgress(e){
+				audioContext.seek(e.detail.value);
+				console.log("e.detail");
+				console.log(e.detail);
+				this.ifPlay = false;
+				this.playMusic();
+			},
+			pre(){
+				this.ifPlay = false;
+				audioContext.pause();
+				// 把字体传回去
+				// let data = JSON.stringify(this.pretxt);
+				uni.navigateTo({
+					url: '/pages/FontSelect/FontSelect?token=' + this.token + '&txt=' + this.pretxt + "&picid=" + this.pic_id,
+				})
+			},
+			download(){
+				var src = 'http://YOURAPIIP:PORT/api/music/get-mp3/' + this.token
+				var iframe = document.createElement('iframe');
+				iframe.style.display = 'none';
+				iframe.src = "javascript: '<script>location.href=\"" + src + "\"<\/script>'";
+				document.getElementsByTagName('body')[0].appendChild(iframe);
+				var src = 'http://YOURAPIIP:PORT/api/music/get-mid/' + this.token
+				var iframe = document.createElement('iframe');
+				iframe.style.display = 'none';
+				iframe.src = "javascript: '<script>location.href=\"" + src + "\"<\/script>'";
+				document.getElementsByTagName('body')[0].appendChild(iframe);
+			},
+		}
+	}
+</script>
+
+<style lang="scss">
+	// 字体
+	@font-face{
+		font-family: font_zhuanshu;
+		src: url('~@/static/font/ZhuanShu.ttf');
+		@include flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	@font-face{
+		font-family: font_lishu;
+		src: url('~@/static/font/lishu/汉仪范笑歌隶书繁.ttf');
+		@include flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	@font-face{
+		font-family: font_caoshu;
+		src: url('~@/static/font/BiaoZhunCaoShu.ttf');
+		@include flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	@font-face{
+		font-family: font_kaishu;
+		src: url('~@/static/font/YanZhenQing.ttf');
+		@include flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	@font-face{
+		font-family: font_xingshu;
+		src: url('~@/static/font/XingShu.ttf');
+		@include flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	@font-face{
+		font-family: font_shoujinti;
+		src: url('~@/static/font/ShouJinTi.ttf');
+		@include flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	@font-face{
+		font-family: font_songti;
+		src: url('~@/static/font/SongTi.ttf');
+		@include flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	.transition{
+		font-size: 14px;
+		display: flex;
+		align-items: center;//适合单行显示的组件，垂直居中
+		justify-content: center;//水平居中
+	}
+	.transition-info{
+		font-size: 14px;
+		display: flex;
+		align-items: center;//适合单行显示的组件，垂直居中
+		justify-content: center;//水平居中
+	}
+	.step {
+		margin: calc(1%);
+	}
+	.info-box{
+		margin-left: 20px;
+		margin-right: 20px;
+		margin-bottom: 20px;
+		height: 900rpx;
+	}
+	.info-abstract{
+		margin-top: 15px;
+		// margin-bottom: 10px;
+		font-family: font_xingshu;
+		font-size: 26px;
+		display: flex;
+		align-items: center;//适合单行显示的组件，垂直居中
+		justify-content: center;//水平居中
+	}
+	.info-sub-title{
+		font-family: font_xingshu;
+		font-size: 24px;
+	}
+	.info-poem{
+		font-size: 14px;
+	}
+	.info-color-area{
+		margin-right: 40px;
+	}
+	.info-color-name-rgb{
+		height: 30px;;
+		font-size: 16px;
+		display: flex;
+		align-items: center;//适合单行显示的组件，垂直居中
+		justify-content: center;//水平居中
+	}
+</style>
+
+<style>
+	.my-music{
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 50px;
+	}
+	.play-bar{
+		margin-left: calc(30%);
+		margin-right: calc(30%);
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 20px 39px 14px 1px;
+		font-size: 30px;
+		position: fixed;
+		bottom: 80upx;
+	}
+	.player-slider{
+		width: calc(70%);
+		height: 50upx;
+		display: flex;
+		align-items: center;
+		position: fixed;
+		bottom: calc(28%);
+	}
+	.player-slider .player-currentTime,
+	.player-slider .player-duration{
+		/* width: 20upx; */
+		/* height: 100%; */
+		font-size: 10px;
+		line-height: 44upx;
+	}
+	.slider{
+		flex: 1;
+	}
+	.btn{
+		align-items: center;
+		justify-content: center;
+		margin-right: calc(3%);
+		position: fixed;
+		bottom: calc(13%);
+	}
+
+</style>
+
+<style lang="scss" scoped>
+	.home{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		.bg {
+		  position: fixed;
+		  top: 0;
+		  left: 0;
+		  width: 100%;
+		  height: 100%;
+		  // background: url("~@/assets/images/bg.png") #bbb;
+		  transition: all 1s linear;
+		}
+		.container {
+		  height: 100%;
+		  width: 100%;
+		  margin: 10px auto;
+		  position: fixed;
+	    }
+		.color-name{
+			font-size: calc(130%);
+			// font-weight:bold;
+			display: flex;
+			align-items: center;//适合单行显示的组件，垂直居中
+			justify-content: center;//水平居中
+			margin-top: calc(5%);
+			margin-left: calc(10%);
+			margin-right: calc(10%);
+		}
+		.poem{
+			font-size: calc(45%);
+			display: flex;
+			align-items: center;//适合单行显示的组件，垂直居中
+			justify-content: center;//水平居中
+			margin-top: calc(5%);
+			margin-left: calc(10%);
+			margin-right: calc(10%);
+		}
+		.poem-info{
+			font-size: calc(25%);
+			display: flex;
+			align-items: center;//适合单行显示的组件，垂直居中
+			justify-content: center;//水平居中
+			margin-top: calc(1%);
+			margin-left: calc(10%);
+			margin-right: calc(10%);
+		}
+		.show-info-btn{
+			display: flex;
+			align-items: center;//适合单行显示的组件，垂直居中
+			justify-content: center;//水平居中
+			margin-top: calc(2%);
+		}
+	}
+	
+</style>

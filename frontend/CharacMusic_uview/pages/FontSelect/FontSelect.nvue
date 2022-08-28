@@ -1,0 +1,575 @@
+<template>
+	<view>
+		<!-- 加载页 -->
+		<view class="box" v-if="music_ok == true">
+			<view class="topbox">
+				<view class="img"></view>
+				<image class="uimg" :src='img_src' mode="aspectFill"></image>
+				<view class="info">
+					<view class="title"> - {{title}} - </view>
+					<view class="author"> 作者：{{zuozhe}}</view>
+					<view class="subtitle"> 简介 </view>
+					<view class="abstract"> {{jianjie}}</view>
+				</view>
+			</view>
+		</view>
+		<view class="reminder" v-if="music_ok == true">
+			正在努力生成中...
+		</view>
+		<view class="bottombox" v-if="music_ok == true">
+			<image style="height: 200px;" mode="aspectFit" src="../../static/loading/loading_color.gif"></image>
+		</view>
+		
+		<!-- 步骤条 -->
+		<view class="step" v-if="music_ok == false">
+			<u-steps current="1" activeColor="#545454" inactiveColor="#ffffff">
+				<u-steps-item title="识别汉字" desc=""></u-steps-item>
+				<u-steps-item title="选择字体" desc="" ></u-steps-item>
+				<u-steps-item title="生成音乐" desc=""></u-steps-item>
+			</u-steps>
+		</view>
+
+		<!-- 显示文本，根据txt_font[1]，用不同字体渲染 -->
+		<view class="txt_show_font" v-if="music_ok == false">
+			<view v-if="txt_font[1] == 'zhuanshu'">
+				<textarea
+					v-model="txt_font[0]" 
+					class="txtarea_zhuanshu"
+					maxlength="-1"
+				></textarea>
+			</view>
+			<view v-if="txt_font[1] == 'lishu'">
+				<textarea
+					v-model="txt_font[0]" 
+					class="txtarea_lishu"
+					maxlength="-1"
+				></textarea>
+			</view>
+			<view v-if="txt_font[1] == 'caoshu'">
+				<textarea
+					v-model="txt_font[0]" 
+					class="txtarea_caoshu"
+					maxlength="-1"
+				></textarea>
+			</view>
+			<view v-if="txt_font[1] == 'kaishu'">
+				<textarea
+					v-model="txt_font[0]" 
+					class="txtarea_kaishu"
+					maxlength="-1"
+				></textarea>
+			</view>
+			<view v-if="txt_font[1] == 'xingshu'">
+				<textarea
+					v-model="txt_font[0]" 
+					class="txtarea_xingshu"
+					maxlength="-1"
+				></textarea>
+			</view>
+			<view v-if="txt_font[1] == 'shoujinti'">
+				<textarea
+					v-model="txt_font[0]" 
+					class="txtarea_shoujinti"
+					maxlength="-1"
+				></textarea>
+			</view>
+			<view v-if="txt_font[1] == 'songti'">
+				<textarea
+					v-model="txt_font[0]" 
+					class="txtarea_songti"
+					maxlength="-1"
+				></textarea>
+			</view>
+		</view>
+
+		<!-- 竹简状，选择字体-->
+		<view class="ziti_list" v-if="music_ok == false">
+			<u-row justify="center">
+				<image v-if="txt_font[1] == 'zhuanshu'" style="hight: 200px;" mode="aspectFit" src="../../static/古筝.png"> </image>
+				<image v-if="txt_font[1] == 'lishu'" style="hight: 200px;" mode="aspectFit" src="../../static/竹笛.png"> </image>
+				<image v-if="txt_font[1] == 'xingshu'" style="hight: 200px;"  mode="aspectFit" src="../../static/古琴.png"> </image>
+				<image v-if="txt_font[1] == 'caoshu'" style="hight: 200px;"  mode="aspectFit" src="../../static/琵琶.png"> </image>
+				<image v-if="txt_font[1] == 'kaishu'" style="hight: 200px;"  mode="aspectFit" src="../../static/箫.png"> </image>
+				<image v-if="txt_font[1] == 'shoujinti'" style="hight: 200px;"  mode="aspectFit" src="../../static/二胡.png"> </image>
+				<image v-if="txt_font[1] == 'songti'" style="hight: 200px;"  mode="aspectFit" src="../../static/扬琴.png"> </image>
+				<u-col span="1">
+					<view @click="ZhuanShu()">
+						<image style="width: 100px; height: 250px;" src="../../static/FontSelectSuCai/ZhuanShu.png" mode="aspectFit"></image>
+					</view>
+				</u-col>
+				<u-col span="1">
+					<view @click="LiShu()">
+						<image style="width: 100px; height: 250px;" src="../../static/FontSelectSuCai/LiShu.png" mode="aspectFit"></image>
+					</view>
+				</u-col>
+				<u-col span="1">
+					<view @click="XingShu()">
+						<image style="width: 100px; height: 250px;" src="../../static/FontSelectSuCai/XingShu.png" mode="aspectFit"></image>
+					</view>
+				</u-col>
+				<u-col span="1">
+					<view @click="CaoShu()">
+						<image style="width: 100px; height: 250px;" src="../../static/FontSelectSuCai/CaoShu.png" mode="aspectFit"></image>
+					</view>
+				</u-col>
+				<u-col span="1">
+					<view @click="KaiShu()">
+						<image style="width: 100px; height: 250px;" src="../../static/FontSelectSuCai/KaiShu.png" mode="aspectFit"></image>
+					</view>
+				</u-col>
+				<u-col span="1">
+					<view @click="ShouJinTi()">
+						<image style="width: 100px; height: 250px;" src="../../static/FontSelectSuCai/ShouJinTi.png" mode="aspectFit"></image>
+					</view>
+				</u-col>
+				<u-col span="1">
+					<view @click="SongTi()">
+						<image style="width: 100px; height: 250px;" src="../../static/FontSelectSuCai/SongTi.png" mode="aspectFit"></image>
+					</view>
+				</u-col>
+			</u-row>
+		</view>
+ 
+		<!-- 底部按钮 -->
+		<view class="jump" v-if="music_ok == false">
+			<u-row justify="center" gutter="600">
+				<u-col span="6">
+					<image style="height:90px;width: 100px;" mode="aspectFit" src="../../static/前.png"  @click="pre()"></image>
+				</u-col>
+				<u-col span="6">
+					<image style="height:90px;width: 100px;" mode="aspectFit" src="../../static/后.png"  @click="next()"></image>
+				</u-col>
+			</u-row>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				txt_font: ["输入的文字","zhuanshu"],		// 文本，字体
+				token: "",								// 标识符
+				pic_id: 0,								// 诗画图片的标识符
+				// 加载页
+				music_ok: false,
+				title: "仿杏花春雨江南",
+				zuozhe: "王翬",
+				jianjie: "此图绘崇山峻岭间殿阁亭榭林立，人物穿梭往来。山水采用高远及深远的构图法，极尽岩岭幽缈之致。岩石以粗笔勾廓，行笔富于变化；部分山体行笔简劲，以墨笔皴擦或覆以石青、石绿；长松古木皆精致地表现出其表面纹理及枝叶，杂树叶冠则以白粉、石绿及墨笔点画或涂染。图中建筑、船只的描绘均未用界尺，但结构准确。屋脊等处多覆以石青、石绿色，用以代表琉璃瓦，门窗则施以对比的朱红色。此外，建筑、船只、山体轮廓以及山间云气等景物多在墨线基础上以金线勾描，部分山体直接以泥金皴点，水纹纯用金线勾成，使画面显得金碧辉煌。全图将山野之间的逸趣与宫殿的富丽完美地结合，是一幅极富装饰趣味的山水楼阁画佳作。",
+				img_src: "../../static/loading/仿杏花春雨江南.jpg",	// 图片地址
+				// 给生成音乐传的数据
+				data_for_music:{
+					"identify": "",
+					"sentence_emo_label": "",
+					"key_tokens": [],
+					"section_emo_values": [],
+					"dynasty" : 1,
+				},
+			}
+		},
+		onLoad(option) {
+			this.token = option.token
+			this.pic_id = option.picid
+			this.img_src = getApp().globalData.img
+			this.data_for_music["identify"] = option.token
+			console.log("传过来了 data for music:")
+			console.log(this.data_for_music["identify"])
+			this.txt_font[0] = option.txt
+			this.music_ok = false
+			uni.request({
+				url: 'http://YOURAPIIP:PORT/api/home/get-picture-info?pic_id=' + this.pic_id,
+				method:"POST",
+				success: res => {
+					console.log('图片简介传过来', res.data)
+					this.title = res.data.name
+					this.zuozhe = res.data.authoer
+					this.jianjie = res.data.content
+					getApp().globalData.img_name = res.data.name
+					getApp().globalData.img_author = res.data.authoer
+					getApp().globalData.img_content = res.data.content
+				}
+			})
+			console.log('img_src', this.img_src)
+			console.log('globalData', getApp().globalData)
+		},
+		methods: {
+			// 底部跳转按钮
+			next(){
+				this.music_ok = true;
+				// 将文本POST，返回情感分析
+				uni.request({
+					url: 'http://YOURAPIIP:PORT/api/character/get-tokens/' + this.txt_font[0],
+					method: 'POST',
+					success: resa => {
+						console.log(resa)
+						console.log(resa.data.sentence_emo_label)
+						console.log(resa.data.key_tokens)
+						console.log(resa.data.section_emo_values)
+						this.data_for_music["sentence_emo_label"] = resa.data.sentence_emo_label
+						this.data_for_music["key_tokens"] = resa.data.key_tokens
+						this.data_for_music["section_emo_values"] = resa.data.section_emo_values
+						console.log("数据：")
+						console.log(this.data_for_music)
+						// setTimeout(() => {
+							// 将分析后的数据给后端，生成音乐
+							uni.request({
+								url: 'http://YOURAPIIP:PORT/api/music/create-music',
+								data: this.data_for_music,
+								method: 'POST',
+								success: res => {
+									console.log(res)
+									if (res.data){
+										console.log("生成成功")
+										// 传数组，先转为string，传过去再处理
+										let items = encodeURIComponent(JSON.stringify(this.txt_font));
+										let items_emo = encodeURIComponent(JSON.stringify(this.data_for_music["section_emo_values"]));
+										uni.navigateTo({
+											url: '/pages/GenerateMusic/GenerateMusic?token=' + this.token + '&txt=' + items + "&forcolor=" + items_emo + "&picid=" + this.pic_id,
+										})
+									}
+									
+								}
+							})
+						// }, 20000);
+					},
+				})
+			},
+			pre(){
+				uni.navigateTo({
+					url:"/pages/CharacterRec/Input/Input?token=" + this.token + "&txt=" + this.txt_font[0] + "&picid=" + this.pic_id,
+				})
+			},
+			// 点击改变字体
+			ZhuanShu(){
+				this.$forceUpdate();
+				// this.dynasty = 1;	// 秦朝
+				this.txt_font[1] = "zhuanshu";
+				this.data_for_music["dynasty"] = 1;
+				console.log(this.txt_font[1]);
+				getApp().globalData.dynasty = "秦";
+			},
+			LiShu(){
+				this.$forceUpdate();
+				// this.dynasty = 2;	// 汉朝
+				this.txt_font[1] = "lishu";
+				this.data_for_music["dynasty"] = 2;
+				console.log(this.txt_font[1]);
+				getApp().globalData.dynasty = "汉";
+			},
+			XingShu(){
+				this.$forceUpdate();
+				// this.dynasty = 5;	// 唐朝2
+				this.txt_font[1] = "xingshu";
+				this.data_for_music["dynasty"] = 3;
+				console.log(this.txt_font[1]);
+				getApp().globalData.dynasty = "唐";
+			},
+			CaoShu(){
+				this.$forceUpdate();
+				// this.dynasty = 3;	// 晋朝
+				this.txt_font[1] = "caoshu";
+				this.data_for_music["dynasty"] = 4;
+				console.log(this.txt_font[1]);
+				getApp().globalData.dynasty = "晋";
+			},
+			KaiShu(){
+				this.$forceUpdate();
+				// this.dynasty = 4;	// 唐朝1
+				this.txt_font[1] = "kaishu";
+				this.data_for_music["dynasty"] = 5;
+				console.log(this.txt_font[1]);
+				getApp().globalData.dynasty = "唐";
+			},
+			ShouJinTi(){
+				this.$forceUpdate();
+				// this.dynasty = 6;	// 宋朝
+				this.txt_font[1] = "shoujinti";
+				this.data_for_music["dynasty"] = 6;
+				console.log(this.txt_font[1]);
+				getApp().globalData.dynasty = "宋";
+			},
+			SongTi(){
+				this.$forceUpdate();
+				// this.dynasty = 7;	// 明朝
+				this.txt_font[1] = "songti";
+				this.data_for_music["dynasty"] = 7;
+				console.log(this.txt_font[1]);
+				getApp().globalData.dynasty = "明";
+			}
+		}
+	}
+</script>
+<style lang="scss">
+	page{
+		height: 100%;
+		position: fixed;
+		background: url('~@/static/绢帛.png');
+	}
+	// 字体
+	@font-face{
+		font-family: font_zhuanshu;
+		src: url('~@/static/font/ZhuanShu.ttf');
+		@include flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	@font-face{
+		font-family: font_lishu;
+		src: url('~@/static/font/lishu/汉仪范笑歌隶书繁.ttf');
+		@include flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	@font-face{
+		font-family: font_caoshu;
+		src: url('~@/static/font/BiaoZhunCaoShu.ttf');
+		@include flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	@font-face{
+		font-family: font_kaishu;
+		src: url('~@/static/font/YanZhenQing.ttf');
+		@include flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	@font-face{
+		font-family: font_xingshu;
+		src: url('~@/static/font/XingShu.ttf');
+		@include flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	@font-face{
+		font-family: font_shoujinti;
+		src: url('~@/static/font/ShouJinTi.ttf');
+		@include flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	@font-face{
+		font-family: font_songti;
+		src: url('~@/static/font/SongTi.ttf');
+		@include flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	// 步骤条
+	.step {
+		font-size: 16px;
+		font-family: font_xingshu;
+		margin: calc(1%);
+	}
+	// 文本显示
+	.txt_show_font{
+		height: calc(40%);
+		margin-top: 3rpx;
+		margin-left: calc(15%);
+		margin-right: calc(15%);
+		margin-bottom: 3rpx;
+		padding-top:  70rpx;
+		padding-left: 100rpx;
+		padding-right: 100rpx;
+		padding-bottom: 70rpx;
+		background: url('~@/static/FontSelectSuCai/卷轴2.png');
+		background-size: 100% 100%;
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+	}
+	.txt{
+		margin-top: 38px;
+		margin-bottom:30px;
+		margin-left: 60px;
+		margin-right: 60px;
+	}
+	.txtarea_zhuanshu{
+		font-size: 80rpx;
+		font-family: font_zhuanshu;
+		height: 300rpx;
+		width: 100%;
+		word-break: break-all;
+	}
+	.txtarea_lishu{
+		font-size: 80rpx;
+		font-family: font_lishu;
+		height: 300rpx;
+		width: 100%;
+		word-break: break-all;
+	}
+	.txtarea_caoshu{
+		font-size: 80rpx;
+		font-family: font_caoshu;
+		height: 300rpx;
+		width: 100%;
+		word-break: break-all;
+	}
+	.txtarea_kaishu{
+		font-size: 80rpx;
+		font-family: font_kaishu;
+		height: 300rpx;
+		width: 100%;
+		word-break: break-all;
+	}
+	.txtarea_xingshu{
+		font-size: 80rpx;
+		font-family: font_xingshu;
+		height: 300rpx;
+		width: 100%;
+		word-break: break-all;
+	}
+	.txtarea_shoujinti{
+		font-size: 80rpx;
+		font-family: font_shoujinti;
+		height: 300rpx;
+		width: 100%;
+		word-break: break-all;
+	}
+	.txtarea_songti{
+		font-size: 80rpx;
+		font-family: font_songti;
+		height: 300rpx;
+		width: 100%;
+		word-break: break-all;
+	}
+	div{
+		list-style: none;
+		transition: .3s linear;
+	}
+	div:hover{
+		transform: scale(1.1);    /*盒子放大*/
+	}
+	div::before, div::after{
+	    position: absolute;
+	    content: '';
+	    transition: 1.3s ease-out ;
+	}
+	// 鼠标悬停放大效果
+	image{
+		color: white;
+		list-style: none;
+		transition: .3s linear;
+	}
+	image:hover{
+		transform: scale(1.55);    /*盒子放大*/
+	}
+	image::before, image::after{
+	    position: absolute;
+	    content: '';
+	    transition: 1.3s ease-out ;
+	}
+	// 鼠标悬停放大效果
+	
+	.jump{
+		margin-top: calc(3%);
+		display: flex;
+		align-items: center;//适合单行显示的组件，垂直居中
+		justify-content: center;//水平居中
+	}
+	.img{
+		height: calc(50%);
+	}
+	.box{
+		position: relative;
+		height: 780rpx;
+		box-sizing: border-box;
+		background-color: #fff;
+		padding: 20px;
+		margin-left: calc(10%);
+		margin-right: calc(10%);
+		margin-top: calc(2%);
+		border-radius: 5px;
+		box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
+	}
+	.box .topbox {
+	    display: flex;
+		padding-left: 10px;
+	    padding-right: 40px;
+	    text-align: justify;
+	}
+	.box .topbox .img {
+	    flex-shrink: 0;
+	    width: 650px;
+	    height: 345px;
+	    margin-right: 60px;
+	    line-height: 345px;
+	    text-align: center;
+		position: absolute;
+	    background: linear-gradient(#eeeeee, #eee);
+	}
+	.uimg{
+		position: absolute;
+		margin-top: calc(2%);
+		margin-left: calc(2%);
+		width: 600px;
+		height: 300px;
+		z-index: 2;
+	}
+	.box .topbox .info {
+	    width: 100%;
+		position: absolute;
+	}
+	.detail .abstract {
+	    margin-top: 30px;
+	}
+	
+	.detail .abstract{
+	    margin-bottom: 12px;
+	    color: #898989;
+		position: absolute;
+	}
+	.title{
+		font-size: 26px;
+		font-weight:bold;
+		position: absolute;
+		margin-left: calc(57%);
+		color: #898989;
+	}
+	.author{
+		font-size: 20px;
+		margin-top: calc(5%);
+		margin-bottom: calc(3%);
+		margin-left: calc(57%);
+		position: absolute;
+		color: #898989;
+	}
+	.subtitle {
+		color: #000000;
+		font-weight:bold;
+		font-size: 20px;
+		margin-top: calc(10%);
+		margin-bottom: calc(3%);
+		margin-left: calc(57%);
+		text-align: left;
+	}
+	.abstract{
+		margin-left: calc(57%);
+		margin-top: calc(14%);
+		position: absolute;
+		width: 470px;
+		background: none;
+		line-height: 22px;
+		font-size: 14px;
+		margin-bottom: 12px;
+		color: #898989;
+	}
+	.bottombox{
+		margin-top: calc(1%);
+		margin-left: calc(40%);
+	}
+	.reminder{
+		margin-top: calc(1%);
+		font-size: 20px;
+		font-family: font_xingshu;
+		display: flex;
+		align-items: center;//适合单行显示的组件，垂直居中
+		justify-content: center;//水平居中
+	}
+</style>

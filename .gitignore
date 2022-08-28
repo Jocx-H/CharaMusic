@@ -1,0 +1,14 @@
+**/venv
+相关资料
+.vscode
+backend/test.py
+backend/music
+**/__pycache__
+backend/assets/china_sf2/
+backend/assets/temp
+**/.idea
+.idea
+**/unpackage
+backend/assets/pictures/pics
+frontend/CharacMusic_uview/manifest.json
+frontend/CharacMusic_uview/static/pics

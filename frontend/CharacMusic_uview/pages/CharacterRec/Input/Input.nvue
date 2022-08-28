@@ -1,0 +1,266 @@
+<template>
+	<view>
+		<!-- 步骤条 -->
+		<view class="step" >
+			<u-steps current="0" activeColor="#545454" inactiveColor="#ffffff">
+				<u-steps-item title="识别汉字" desc=""></u-steps-item>
+				<u-steps-item title="选择字体" desc="" ></u-steps-item>
+				<u-steps-item title="生成音乐" desc=""></u-steps-item>
+			</u-steps>
+		</view>
+		<!-- 选择是输入还是上传图片 -->
+		<view class="choose">
+			<u-subsection
+				:list="list" 
+				:current="curNow" 
+				fontSize=calc(25%)
+				mode="button"
+				activeColor=#545454
+				inactiveColor=#c8c8c8
+				bgColor=#545454
+				@change="sectionChange">
+			</u-subsection> 
+		</view>
+		
+		<!-- 输入汉字 -->
+		<view class="txt" v-if="curNow == 0">
+			<textarea class="txtarea" @input="onInput" placeholder="你在写, 我在听~" maxlength="-1" v-model="txt_input" :value="txt_input"></textarea>
+		</view>
+		
+		<!-- 上传图片 -->
+		<view class="uplPic" v-if="curNow == 1">
+			<!-- 这里放选好的图片 -->
+			<block v-for="(item, index) in imglist" :key="index">
+			  <view class='img-box'>
+				<u--image width="600px" height="255px" :src='item' mode='aspectFill'></u--image>
+				<view @click='imgDelete1' :data-delindex="index">
+					<button style="width: calc(80%); background-color: #fff0; margin-left: 65px;"> 删除 </button>
+				</view>
+			  </view>
+			</block>
+			<!-- 选择上传图片 -->
+			<u--image width="550px" height="300px" src="../../../static/add-pic.png" bgColor="#fff0" @click='addPic1' v-if="imglist.length<1"></u--image>
+		</view>
+		
+		
+		<!-- 上下 -->
+		<view class="jump">
+			<u-row justify="center" gutter="600">
+				<u-col span="6">
+					<image class="preImg" style="height:90px; width: 100px;" mode="aspectFit" src="../../../static/前.png"  @click="pre()"></image>
+				</u-col>
+				<u-col span="6">
+					<image class="nextImg" style="height:90px; width: 100px;" mode="aspectFit" src="../../../static/后.png"  @click="uploadimage();next()"></image>
+				</u-col>
+			</u-row>
+		</view>
+
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				list: ['输入汉字', '手写汉字'],
+				curNow: 0,				// 当前默认为 “输入汉字”
+				txt_input: '默认文字',			// 输入的汉字
+				token: "",
+				pic_id: 0,
+				imglist:[],				//选择图片后生成的临时地址数组
+			}
+		},
+		onLoad(option) {
+			this.token = option.token
+			this.txt_input = option.txt
+			this.pic_id = option.picid
+		},
+		methods: {
+			pre(){
+				uni.navigateTo({
+					url: '../../Home/Home'
+				})
+			},
+			//*选择图片*//
+			addPic1: async function() {
+				let that = this				
+				uni.chooseImage({
+					count: 1,  // 最多可以选择的图片张数，默认9
+					sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
+					sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
+				    success: function (res) {						
+						if (that.imglist.length === 0) {
+							that.imglist = res.tempFilePaths
+						} else if (that.imglist.length < 9) {
+							that.imglist = that.imglist.concat(res.tempFilePaths); //concat追加到数组
+						}
+					}
+				})
+			},
+			//* 删除已经选择的图片 *//
+			imgDelete1: function (e) {				
+				let index = e.currentTarget.dataset.delindex; //获取要删除的图片的下标，否则删除的永远是第一张 ,对应 <view class='img-delect' @click='imgDelete1' :data-delindex="index">
+				this.imglist.splice(index, 1);
+			},
+			onInput: function(e){
+				this.txt_input = e.target.value
+			},
+			//*上传图片*//
+			uploadimage: function () {
+				let app = getApp()
+				let that = this
+				let upimg = require("./upimg.js") //引用当前目录下的自定义函数
+				let text2 = that.text1
+				
+				if (that.imglist.length != 0 ) { //数组不为空的时候才执行 				
+					upimg.uploadimg({ //********* 调用引入的upimg.js文件uploadimg函数 ************
+						url: "http://YOURAPIIP:PORT/api/character/upload-handwriting-picture/identify?identify=" + this.token, //全局变量，后端接口地址
+						path: that.imglist, //选取图片的临时地址数组 
+						// text: that.text1,  //文本框内容  
+						// user: app.globalData.username, 
+					});
+					console.log("显示提示框");
+					uni.showToast({  //显示对话框
+						title: "识别中！",
+						icon: 'loading',
+						mask: true,
+						duration: 10000
+					});					
+					setTimeout(function () { //延迟执行，目的是等待上一步的uploadimg函数执行完成赋值给全局变量后再执行下面的代码
+					}, 10000); //延迟时间
+				 
+				} else {
+					uni.showToast({
+					  title: "请添加图片！",
+					  icon: 'none',
+					  duration: 1000,
+					})
+				}
+			},
+			next(){
+				if(this.curNow == 1){
+					setTimeout(() => {
+						console.log("开始识别")
+						uni.request({
+							url: 'http://YOURAPIIP:PORT/api/character/get-handwriting-text/identify?identify=' + this.token,
+							method: 'POST',
+							success: res => {
+								console.log(res.data)
+								if(res.data){
+									console.log("识别成功")
+									this.txt_input = res.data.text
+									uni.hideToast()
+									uni.navigateTo({
+										url: '../../FontSelect/FontSelect?token=' + this.token + '&txt=' + this.txt_input + "&picid=" + this.pic_id,
+									})
+								}
+							}
+						})
+					}, 10000);
+				}
+				else{
+					// console.log('txt_input', txt_input)s
+					if(this.txt_input == ""){
+						uni.showToast({
+							icon: 'none',
+							title: '请输入文字',
+							duration:1500,
+							mask: true,
+						})
+					}
+					else{
+						uni.navigateTo({
+							url: '../../FontSelect/FontSelect?token=' + this.token + '&txt=' + this.txt_input + "&picid=" + this.pic_id,
+						})
+					}
+				}
+
+			},
+			sectionChange(index) {
+				console.log(index);
+				this.curNow = index;
+			}
+		}
+	}
+</script>
+
+<style lang="scss">
+	page{
+		height: 100%;
+		position: fixed;
+		background: url('~@/static/绢帛.png');
+	}
+	@font-face{
+		font-family: font_xingshu;
+		src: url('~@/static/font/XingShu.ttf');
+		@include flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	.choose {
+		margin-top: calc(3%);
+		margin-left: calc(15%);
+		margin-right: calc(15%);
+	}
+	.step {
+		font-size: 16px;
+		font-family: font_xingshu;
+		margin: calc(1%);
+	}
+	.txt{
+		margin-top: calc(3%);
+		margin-left: calc(15%);
+		margin-right: calc(15%);
+		// margin-bottom: calc(5%);
+		height: calc(50%);
+	}
+	.txtarea{
+		border: 3px solid #545454;
+		height: 665rpx;
+		width: 100%;
+		word-break: break-all; //解决兼容问题
+	}
+	.pic{
+		margin-left: calc(30%);
+		margin-right: calc(10%);
+	}
+	.pix-box {
+		margin-top:calc(5%);
+		margin-left: calc(20%);
+	}
+	.upload{
+		border-radius: 21px;
+		margin: 10px 8px 8px 10px;
+	}
+	.file-picker__box{
+		width: 60% !important;
+	}
+	.uplPic{
+		margin-top: calc(5%);
+		margin-left: calc(32%);
+		margin-right: calc(30%);
+	}
+
+	// 鼠标悬停放大效果
+	image{
+		color: white;
+		list-style: none;
+		transition: .3s linear;
+	}
+	image:hover{
+		transform: scale(1.55);    /*盒子放大*/
+	}
+	image::before, image::after{
+	    position: absolute;
+	    content: '';
+	    transition: 1.3s ease-out ;
+	}
+	.jump{
+		margin-top: calc(4%);
+		display: flex;
+		align-items: center;//适合单行显示的组件，垂直居中
+		justify-content: center;//水平居中
+	}
+	
+</style>

@@ -1,0 +1,237 @@
+QIN0
+乐器组合 (GUZHENG, ERHU)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_blswspy.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_sus.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_VibShaker1.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_Ud2dk.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\ErHu_KeySwitchB.sf2
+Channel 7 | g:\Gitee\charamusic\backend\assets\china_sf2\ErHu_GraceUpKs1.sf2
+
+QIN1
+乐器组合(GUZHENG, XIAO)
+取样器为 [Sampler] china1
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_blswspy.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_sus.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_VibShaker1.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_Ud2dk.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\Xiao_Loop.sf2
+Channel 7 | g:\Gitee\charamusic\backend\assets\china_sf2\Xiao_SusVibLeg.sf2
+
+QIN2
+乐器组合 (GUZHENG, XUN)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_blswspy.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_sus.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_VibShaker1.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_Ud2dk.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\Xun_ProGram.sf2
+Channel 7 | g:\Gitee\charamusic\backend\assets\china_sf2\Xun_VibCryFX.sf2
+
+HAN0
+乐器组合 (DIZI, YANGQIN, ERHU)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\DiZi_ArtfillKeyA1.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\DiZi_FHighLeg.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\YangQin_Sus.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\YangQin_Loop.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\YangQin_SusPro.sf2
+Channel 7 | g:\Gitee\charamusic\backend\assets\china_sf2\ErHu_KeySwitchB.sf2
+Channel 8 | g:\Gitee\charamusic\backend\assets\china_sf2\ErHu_GraceUpKs1.sf2
+
+HAN1
+乐器组合(DIZI, ERHU, PIPA)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\DiZi_ArtfillKeyA1.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\DiZi_FHighLeg.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\ErHu_KeySwitchB.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\ErHu_GraceUpKs1.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_SJ-Loops.sf2
+Channel 7 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_ProChg.sf2
+Channel 8 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_SusRoll.sf2
+Channel 9 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_GZ1P.sf2
+Channel 10 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_VibLeg.sf2
+
+HAN2
+乐器组合 (DIZI, ERHU, GUZHENG)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\DiZi_ArtfillKeyA1.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\DiZi_FHighLeg.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\ErHu_KeySwitchB.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\ErHu_GraceUpKs1.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_blswspy.sf2
+Channel 7 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_sus.sf2
+Channel 8 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_VibShaker1.sf2
+Channel 9 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_Ud2dk.sf2
+
+HAN3
+乐器组合 (DIZI, XIAO)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\DiZi_ArtfillKeyA1.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\DiZi_FHighLeg.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\Xiao_Loop.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\Xiao_SusVibLeg.sf2
+
+JIN0
+乐器组合 (GUQIN, GUZHENG, DIZI)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_SJ-Loops.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_ProChg.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_Mo.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_GouVelLeg.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_GouVelUp.sf2
+Channel 7 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_Harmonics.sf2
+Channel 8 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_blswspy.sf2
+Channel 9 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_sus.sf2
+Channel 10 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_VibShaker1.sf2
+Channel 11 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_Ud2dk.sf2
+Channel 12 | g:\Gitee\charamusic\backend\assets\china_sf2\DiZi_ArtfillKeyA1.sf2
+Channel 13 | g:\Gitee\charamusic\backend\assets\china_sf2\DiZi_FHighLeg.sf2
+
+JIN1
+乐器组合 (GUQIN, XUN)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_SJ-Loops.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_ProChg.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_Mo.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_GouVelLeg.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_GouVelUp.sf2
+Channel 7 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_Harmonics.sf2
+Channel 8 | g:\Gitee\charamusic\backend\assets\china_sf2\Xun_ProGram.sf2
+Channel 9 | g:\Gitee\charamusic\backend\assets\china_sf2\Xun_VibCryFX.sf2
+
+JIN2
+乐器组合 (GUQIN, XIAO)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_SJ-Loops.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_ProChg.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_Mo.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_GouVelLeg.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_GouVelUp.sf2
+Channel 7 | g:\Gitee\charamusic\backend\assets\china_sf2\GuQin_Harmonics.sf2
+Channel 8 | g:\Gitee\charamusic\backend\assets\china_sf2\Xiao_Loop.sf2
+Channel 9 | g:\Gitee\charamusic\backend\assets\china_sf2\Xiao_SusVibLeg.sf2
+
+TANG10
+乐器组合 (PIPA, DIZI)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_SJ-Loops.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_ProChg.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_SusRoll.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_GZ1P.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_VibLeg.sf2
+Channel 7 | g:\Gitee\charamusic\backend\assets\china_sf2\DiZi_ArtfillKeyA1.sf2
+Channel 8 | g:\Gitee\charamusic\backend\assets\china_sf2\DiZi_FHighLeg.sf2
+
+TANG11
+乐器组合 (PIPA, GUZHENG, XIAO)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_SJ-Loops.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_ProChg.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_SusRoll.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_GZ1P.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_VibLeg.sf2
+Channel 7 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_blswspy.sf2
+Channel 8 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_sus.sf2
+Channel 9 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_VibShaker1.sf2
+Channel 10 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_Ud2dk.sf2
+Channel 11 | g:\Gitee\charamusic\backend\assets\china_sf2\Xiao_Loop.sf2
+Channel 12 | g:\Gitee\charamusic\backend\assets\china_sf2\Xiao_SusVibLeg.sf2
+
+TANG20
+乐器组合 (XIAO, ERHU, PIPA)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\Xiao_Loop.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\Xiao_SusVibLeg.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\ErHu_KeySwitchB.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\ErHu_GraceUpKs1.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_SJ-Loops.sf2
+Channel 7 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_ProChg.sf2
+Channel 8 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_SusRoll.sf2
+Channel 9 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_GZ1P.sf2
+Channel 10 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_VibLeg.sf2
+
+TANG21
+乐器组合 (XIAO, GUZHENG, PIPA)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\Xiao_Loop.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\Xiao_SusVibLeg.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_blswspy.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_sus.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_VibShaker1.sf2
+Channel 7 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_Ud2dk.sf2
+Channel 8 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_SJ-Loops.sf2
+Channel 9 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_ProChg.sf2
+Channel 10 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_SusRoll.sf2
+Channel 11 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_GZ1P.sf2
+Channel 12 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_VibLeg.sf2
+
+SONG0
+乐器组合 (ERHU, PIPA)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\ErHu_KeySwitchB.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\ErHu_GraceUpKs1.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_SJ-Loops.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_ProChg.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_SusRoll.sf2
+Channel 7 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_GZ1P.sf2
+Channel 8 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_VibLeg.sf2
+
+SONG1
+乐器组合 (ERHU, GUZHENG)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\ErHu_KeySwitchB.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\ErHu_GraceUpKs1.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_blswspy.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_sus.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_VibShaker1.sf2
+Channel 7 | g:\Gitee\charamusic\backend\assets\china_sf2\GuZheng_Ud2dk.sf2
+
+MING0
+乐器组合 (YANGQIN, PIPA)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\YangQin_Sus.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\YangQin_Loop.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\YangQin_SusPro.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_SJ-Loops.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_ProChg.sf2
+Channel 7 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_SusRoll.sf2
+Channel 8 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_GZ1P.sf2
+Channel 9 | g:\Gitee\charamusic\backend\assets\china_sf2\PiPa_VibLeg.sf2
+
+MING1
+乐器组合 (YANGQIN, ERHU)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\YangQin_Sus.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\YangQin_Loop.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\YangQin_SusPro.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\ErHu_KeySwitchB.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\ErHu_GraceUpKs1.sf2
+
+MING2
+乐器组合 (SUONA, DIZI)
+取样器为 [Sampler] china
+Channel 1 | not loaded
+Channel 2 | g:\Gitee\charamusic\backend\assets\china_sf2\SuoNa_Loop.sf2
+Channel 3 | g:\Gitee\charamusic\backend\assets\china_sf2\SuoNa_DSusLeg.sf2
+Channel 4 | g:\Gitee\charamusic\backend\assets\china_sf2\SuoNa_VibVelUpLeg.sf2
+Channel 5 | g:\Gitee\charamusic\backend\assets\china_sf2\DiZi_ArtfillKeyA1.sf2
+Channel 6 | g:\Gitee\charamusic\backend\assets\china_sf2\DiZi_FHighLeg.sf2
